@@ -23,7 +23,7 @@
     "@types/lzma-native": "^4.0.4",
     "@types/plist": "^3.0.5",
     "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.1",
+    "@types/react-dom": "^19.2.2",
     "@types/unbzip2-stream": "^1.4.3",
     "autoprefixer": "^10.4.21",
     "bplist-parser": "^0.3.2",
