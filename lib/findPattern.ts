@@ -336,7 +336,10 @@ function readUint64BE(buffer: Uint8Array, offset: number): bigint {
 // Find pattern in ZIP file
 async function findPatternInZip(
   url: string,
-  pattern: Uint8Array
+  pattern: Uint8Array,
+  options: {
+    useGetCheck: boolean;
+  }
 ): Promise<SearchResult> {
   const controller = new AbortController();
 
@@ -346,8 +349,11 @@ async function findPatternInZip(
 
   // Get file size
   const headResp = await fetch(url, {
-    method: "HEAD",
-    headers: { "Accept-Encoding": "identity" },
+    method: options.useGetCheck ? "GET" : "HEAD",
+    headers: {
+      "Accept-Encoding": "identity",
+      ...(options.useGetCheck ? { "Range": "bytes=0-0" } : {}),
+    }
   });
 
   if (!headResp.ok) {
@@ -647,7 +653,10 @@ async function findPatternInZip(
 // Find pattern in DMG file
 async function findPatternInDmg(
   url: string,
-  pattern: Uint8Array
+  pattern: Uint8Array,
+  options: {
+    useGetCheck: boolean;
+  }
 ): Promise<SearchResult> {
   const controller = new AbortController();
 
@@ -657,8 +666,11 @@ async function findPatternInDmg(
 
   // Check if file is GCS gzipped
   const headResp = await fetch(url, {
-    method: "HEAD",
-    headers: { "Accept-Encoding": "gzip" },
+    method: options.useGetCheck ? "GET" : "HEAD",
+    headers: {
+      "Accept-Encoding": "gzip",
+      ...(options.useGetCheck ? { "Range": "bytes=0-0" } : {}),
+    }
   });
 
   const storedEncoding = headResp.headers.get("x-goog-stored-content-encoding");
@@ -666,8 +678,9 @@ async function findPatternInDmg(
 
   let fileSize = 0n;
   const contentLength =
-    headResp.headers.get("content-length") ||
-    headResp.headers.get("x-goog-stored-content-length");
+    headResp.headers.get("x-goog-stored-content-length") ||
+    headResp.headers.get("content-length");
+
   if (contentLength) {
     fileSize = BigInt(contentLength);
   }
@@ -1158,7 +1171,10 @@ function searchDmgBuffer(
 // Main entry point
 export async function findPattern(
   url: string,
-  patternString: string
+  patternString: string,
+  options: {
+    useGetCheck: boolean;
+  } = {useGetCheck: false}
 ): Promise<SearchResult> {
   const pattern = new TextEncoder().encode(patternString);
 
@@ -1169,8 +1185,11 @@ export async function findPattern(
 
   // Check file format
   const headResp = await fetch(url, {
-    method: "HEAD",
-    headers: { "Accept-Encoding": "gzip" },
+    method: options.useGetCheck ? "GET" : "HEAD",
+    headers: {
+      "Accept-Encoding": "gzip",
+      ...(options.useGetCheck ? { "Range": "bytes=0-0" } : {}),
+    },
     redirect: "follow",
   });
 
@@ -1191,12 +1210,12 @@ export async function findPattern(
       if (debug) {
         console.log("✓ Detected DMG file (from filename)");
       }
-      return findPatternInDmg(finalURL, pattern);
+      return findPatternInDmg(finalURL, pattern, options);
     } else if (finalURL.toLowerCase().endsWith(".zip")) {
       if (debug) {
         console.log("✓ Detected ZIP file (from filename)");
       }
-      return findPatternInZip(finalURL, pattern);
+      return findPatternInZip(finalURL, pattern, options);
     }
   }
 
@@ -1215,13 +1234,13 @@ export async function findPattern(
     if (debug) {
       console.log("✓ Detected ZIP file format (from magic bytes)");
     }
-    return findPatternInZip(finalURL, pattern);
+    return findPatternInZip(finalURL, pattern, options);
   }
 
   // Check for DMG by looking for koly footer
   const contentLength =
-    headResp.headers.get("content-length") ||
-    headResp.headers.get("x-goog-stored-content-length");
+    headResp.headers.get("x-goog-stored-content-length") ||
+    headResp.headers.get("content-length");
 
   if (contentLength) {
     const fileSize = BigInt(contentLength);
@@ -1242,7 +1261,7 @@ export async function findPattern(
         if (debug) {
           console.log("✓ Detected DMG file format (from koly footer)");
         }
-        return findPatternInDmg(finalURL, pattern);
+        return findPatternInDmg(finalURL, pattern, options);
       }
     }
   }
@@ -1251,7 +1270,7 @@ export async function findPattern(
   if (debug) {
     console.log("Defaulting to ZIP file format");
   }
-  return findPatternInZip(finalURL, pattern);
+  return findPatternInZip(finalURL, pattern, options);
 }
 
 // Parse and search a DMG entirely from an in-memory buffer
