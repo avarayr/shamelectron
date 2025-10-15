@@ -9,7 +9,7 @@ export function Footer() {
           {/* Left side - GitHub link with icon */}
           <div className="flex items-center gap-3">
             <a
-              href="http://github.com/avarayr/shamelectron"
+              href="https://github.com/avarayr/shamelectron"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-3 text-gray-400 hover:text-white transition-colors duration-200"
