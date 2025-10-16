@@ -2,7 +2,7 @@ import { findPattern } from "@/lib/findPattern";
 import { FixedStatus, type AppMeta } from "../../types";
 
 export const Plexamp: AppMeta = {
-  icon: "https://cdn.brandfetch.io/id6OgdnqKb/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1736438079801",
+  icon: "https://cdn.brandfetch.io/id6OgdnqKb/w/128/h/128/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1736438079801",
   id: "plexamp",
   friendlyName: "plexamp",
   twitter: "plexamp",
