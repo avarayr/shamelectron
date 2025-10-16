@@ -1,7 +1,7 @@
 import { findPattern } from "@/lib/findPattern";
 import { FixedStatus, type AppMeta } from "../../types";
 
-export const Plexamp: AppMeta = {
+export const Openmtp: AppMeta = {
   icon: "",
   id: "openmtp",
   friendlyName: "openmtp",
