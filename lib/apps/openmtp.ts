@@ -2,7 +2,7 @@ import { findPattern } from "@/lib/findPattern";
 import { FixedStatus, type AppMeta } from "../../types";
 
 export const Openmtp: AppMeta = {
-  icon: "",
+  icon: "https://openmtp.ganeshrvel.com/favicon.ico",
   id: "openmtp",
   friendlyName: "openmtp",
   twitter: "openmtp",
