@@ -7,8 +7,18 @@ export const PodmanDesktop: AppMeta = {
   friendlyName: "Podman Desktop",
   twitter: "podman-desktop",
   async checkIsFixed() {
-    const url =
-      "https://github.com/podman-desktop/podman-desktop/releases/download/v1.22.1/podman-desktop-1.22.1-universal.dmg";
+    const url = await fetch(
+      "https://api.github.com/repos/podman-sandbox/podman-desktop/releases/latest"
+    )
+      .then((res) => res.json())
+      .then(
+        (data) =>
+          data.assets.find(
+            (asset: { name: string }) =>
+              asset.name.startsWith("podman-desktop") &&
+              asset.name.endsWith(".dmg")
+          )?.browser_download_url
+      );
     const pat = "_cornerMask";
     const result = await findPattern(url, pat);
     return result?.found ? FixedStatus.NOT_FIXED : FixedStatus.FIXED;
