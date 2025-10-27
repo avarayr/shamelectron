@@ -8,18 +8,7 @@ export const Keybase: AppMeta = {
   friendlyName: "Keybase",
   twitter: "keybaseio",
   async checkIsFixed() {
-    const url = await fetch(
-      "https://api.github.com/repos/keybase/client/releases/latest"
-    )
-      .then((res) => res.json())
-      .then(
-        (data) =>
-          data.assets.find(
-            (asset: { name: string }) =>
-              asset.name.startsWith("keybase-v") &&
-              asset.name.endsWith(".tar.xz")
-          )?.browser_download_url
-      );
+    const url = "https://prerelease.keybase.io/Keybase-arm64.dmg";
     const pat = "_cornerMask";
     const result = await findPattern(url, pat);
     return result?.found ? FixedStatus.NOT_FIXED : FixedStatus.FIXED;
