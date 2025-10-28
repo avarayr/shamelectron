@@ -7,8 +7,18 @@ export const Mockoon: AppMeta = {
   friendlyName: "Mockoon",
   twitter: "",
   async checkIsFixed() {
-    const url =
-      "https://github.com/mockoon/mockoon/releases/download/v9.3.0/mockoon.setup.9.3.0.arm64.dmg";
+    const url = await fetch(
+      "https://api.github.com/repos/mockoon/mockoon/releases/latest"
+    )
+      .then((res) => res.json())
+      .then(
+        (data) =>
+          data.assets.find(
+            (asset: { name: string }) =>
+              asset.name.startsWith("mockoon.setup") &&
+              asset.name.endsWith(".arm64.dmg")
+          )?.browser_download_url
+      );
     const pat = "_cornerMask";
     const result = await findPattern(url, pat);
     return result?.found ? FixedStatus.NOT_FIXED : FixedStatus.FIXED;
