@@ -57,14 +57,12 @@ function StatusIndicator({ status }: { status: FixedStatus }) {
 
 export function AppRow({ app }: { app: AppRecord }) {
   const [showThanksModal, setShowThanksModal] = useState(false);
-  const [dontShowThanksAgain, setDontShowThanksAgain] = useState(false);
   const DISMISS_KEY = "x-follow-thanks-dismissed";
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
+  const [dontShowThanksAgain, setDontShowThanksAgain] = useState(() => {
+    if (typeof window === "undefined") return false;
     const stored = window.localStorage.getItem(DISMISS_KEY);
-    setDontShowThanksAgain(stored === "1");
-  }, []);
+    return stored === "1";
+  });
 
   const handleTwitterClick = () => {
     if (!dontShowThanksAgain) {
