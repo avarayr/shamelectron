@@ -1,6 +1,4 @@
-import { NotionCalendar } from "./lib/apps/notion-calendar";
-
-const app = NotionCalendar;
+import { Legcord as app } from "./lib/apps/legcord";
 
 const result = await app.checkIsFixed();
 
