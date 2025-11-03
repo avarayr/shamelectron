@@ -7,7 +7,7 @@ export const Tidal: AppMeta = {
   friendlyName: "Tidal",
   twitter: "TIDAL",
   async checkIsFixed() {
-    const url = "https://desktop.tidal.com/download/mac";
+    const url = "https://download.tidal.com/desktop/TIDAL.arm64.dmg";
     const pat = "_cornerMask";
     const result = await findPattern(url, pat);
     return result?.found ? FixedStatus.NOT_FIXED : FixedStatus.FIXED;
