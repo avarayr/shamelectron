@@ -7,7 +7,8 @@ export const WavesCentral: AppMeta = {
   friendlyName: "Waves Central",
   twitter: "WavesAudioLtd",
   async checkIsFixed() {
-    const url = "https://www.waves.com/dlrdr?id=central-mac";
+    const url =
+      "https://cf-installers.waves.com/WavesCentral/Install_Waves_Central.dmg";
     const pat = "_cornerMask";
     const result = await findPattern(url, pat, { useGetCheck: true });
     return result?.found ? FixedStatus.NOT_FIXED : FixedStatus.FIXED;

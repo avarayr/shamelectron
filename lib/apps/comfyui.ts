@@ -9,7 +9,7 @@ export const Comfyui: AppMeta = {
   async checkIsFixed() {
     const url = "https://download.comfy.org/mac/dmg/arm64";
     const pat = "_cornerMask";
-    const result = await findPattern(url, pat);
+    const result = await findPattern(url, pat, { useGetCheck: true });
     return result?.found ? FixedStatus.NOT_FIXED : FixedStatus.FIXED;
   },
 };

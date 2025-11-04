@@ -1,5 +1,5 @@
-import { Legcord as app } from "./lib/apps/legcord";
+import { WavesCentral } from "./lib/apps/waves-central";
 
-const result = await app.checkIsFixed();
+const result = await WavesCentral.checkIsFixed();
 
 console.log(result);
