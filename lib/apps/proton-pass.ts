@@ -1,7 +1,7 @@
 import { FixedStatus, type AppMeta } from "@/types";
 import { findPattern } from "@/lib/findPattern";
 
-export const ProtonMail: AppMeta = {
+export const ProtonPass: AppMeta = {
   icon: "https://proton.me/favicons/apple-touch-icon.png",
   id: "proton-pass",
   friendlyName: "Proton Pass",
