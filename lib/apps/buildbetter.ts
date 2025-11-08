@@ -26,7 +26,7 @@ export const BuildBetter: AppMeta = {
 
     const pat = "_cornerMask";
     const result = await findPattern(url, pat, { useGetCheck: true });
-    console.log(result);
+   
     return result?.found ? FixedStatus.NOT_FIXED : FixedStatus.FIXED;
   },
 };
