@@ -2,7 +2,7 @@ import { FixedStatus, type AppMeta } from "@/types";
 import { findPattern } from "@/lib/findPattern";
 
 export const BuildBetter: AppMeta = {
-  icon: "https://buildbetter.ai/favicon.ico",
+  icon: "https://framerusercontent.com/images/u3RqDUSH6DxeVKc5yySyscbzs.png",
   id: "buildbetter",
   friendlyName: "BuildBetter",
   async checkIsFixed() {
@@ -26,7 +26,7 @@ export const BuildBetter: AppMeta = {
 
     const pat = "_cornerMask";
     const result = await findPattern(url, pat, { useGetCheck: true });
-   
+
     return result?.found ? FixedStatus.NOT_FIXED : FixedStatus.FIXED;
   },
 };
