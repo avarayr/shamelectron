@@ -21,7 +21,7 @@
         "cli-progress": "^3.12.0",
         "clsx": "^2.1.1",
         "jotai": "^2.15.1",
-        "lucide-react": "^0.552.0",
+        "lucide-react": "^0.553.0",
         "lzma-native": "^8.0.6",
         "next": "^15.5.6",
         "plist": "^3.1.0",
@@ -735,7 +735,7 @@
 
     "lru-cache": ["lru-cache@5.1.1", "", { "dependencies": { "yallist": "^3.0.2" } }, "sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w=="],
 
-    "lucide-react": ["lucide-react@0.552.0", "", { "peerDependencies": { "react": "^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0" } }, "sha512-g9WCjmfwqbexSnZE+2cl21PCfXOcqnGeWeMTNAOGEfpPbm/ZF4YIq77Z8qWrxbu660EKuLB4nSLggoKnCb+isw=="],
+    "lucide-react": ["lucide-react@0.553.0", "", { "peerDependencies": { "react": "^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0" } }, "sha512-BRgX5zrWmNy/lkVAe0dXBgd7XQdZ3HTf+Hwe3c9WK6dqgnj9h+hxV+MDncM88xDWlCq27+TKvHGE70ViODNILw=="],
 
     "lzma-native": ["lzma-native@8.0.6", "", { "dependencies": { "node-addon-api": "^3.1.0", "node-gyp-build": "^4.2.1", "readable-stream": "^3.6.0" }, "bin": { "lzmajs": "bin/lzmajs" } }, "sha512-09xfg67mkL2Lz20PrrDeNYZxzeW7ADtpYFbwSQh9U8+76RIzx5QsJBMy8qikv3hbUPfpy6hqwxt6FcGK81g9AA=="],
 
