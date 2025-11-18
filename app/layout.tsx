@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Inter } from "next/font/google";
+import { Banner } from "@/components/banner";
 import "./globals.css";
 
 const inter = Inter({
@@ -76,6 +77,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body className={`${inter.variable} font-mono antialiased`}>
+        <Banner />
         {children}
       </body>
     </html>
