@@ -2,6 +2,7 @@ import { AppRecord } from "@/types";
 import { AppGridClient } from "./app-grid-client";
 import { Footer } from "./footer";
 import TimeAgo from "./time-ago";
+import { InfoBanner } from "./info-banner";
 
 const dateTime = new Date(
   new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString()
@@ -36,6 +37,9 @@ export function AppGrid({ apps }: { apps: AppRecord[] }) {
       </div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12 relative z-10">
+        {/* Informational Banner */}
+        <InfoBanner />
+
         {/* Header */}
         <header className="mb-3">
           <h1 className="text-2xl font-mono text-white mb-2">shamelectron</h1>
