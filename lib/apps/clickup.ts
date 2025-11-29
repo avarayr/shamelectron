@@ -8,7 +8,7 @@ export const Clickup: AppMeta = {
   twitter: "clickup",
   async checkIsFixed() {
     const url =
-      "https://desktop.clickup.com/mac";
+      "https://download.todesktop.com/221003ra4tebclw/ClickUp%203.5.154%20-%20Build%20251111ehyopedtu-arm64.dmg";
     const pat = "_cornerMask";
     const result = await findPattern(url, pat);
     return result?.found ? FixedStatus.NOT_FIXED : FixedStatus.FIXED;
