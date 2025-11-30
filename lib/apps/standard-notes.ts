@@ -5,7 +5,7 @@ export const StandardNotes: AppMeta = {
   // prettier-ignore
   icon: "https://avatars.githubusercontent.com/u/24537496?s=128",
   id: "standard-notes",
-  friendlyName: "StandardNotes",
+  friendlyName: "Standard Notes",
   twitter: "StandardNotes",
   async checkIsFixed() {
     const url = await fetch(
