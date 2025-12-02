@@ -7,10 +7,26 @@ export const Clickup: AppMeta = {
   friendlyName: "Clickup",
   twitter: "clickup",
   async checkIsFixed() {
-    const url =
-      "https://download.todesktop.com/221003ra4tebclw/ClickUp%203.5.154%20-%20Build%20251111ehyopedtu-arm64.dmg";
+    const versions = await fetch(
+      "https://download.todesktop.com/221003ra4tebclw/latest-mac.yml"
+    )
+      .then((res) => res.text())
+      .then(
+        (text) =>
+          Bun.YAML.parse(text) as {
+            version: string;
+            files: { url: string }[];
+          }
+      );
+
+    const filename = versions.files?.find((file) =>
+      file.url.includes("-arm64.dmg")
+    )?.url;
+
+    const url = `https://download.todesktop.com/221003ra4tebclw/${filename}`;
+
     const pat = "_cornerMask";
-    const result = await findPattern(url, pat);
+    const result = await findPattern(url, pat, { useGetCheck: true });
     return result?.found ? FixedStatus.NOT_FIXED : FixedStatus.FIXED;
   },
 };
