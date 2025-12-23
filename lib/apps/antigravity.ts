@@ -7,18 +7,19 @@ export const Antigravity: AppMeta = {
   friendlyName: "Google Antigravity IDE",
   twitter: "antigravity",
   async checkIsFixed() {
-    const url = await fetch(
-      "https://antigravity.google/download"
-    )
-      .then((res) => res.json())
-      .then(
-        (data) =>
-          data.assets.find((asset: { name: string }) =>
-            asset.name.includes("darwin-arm") && asset.name.endsWith(".dmg")
-          )?.browser_download_url
-      );
-    const pat = "_cornerMask";
-    const result = await findPattern(url, pat);
-    return result?.found ? FixedStatus.NOT_FIXED : FixedStatus.FIXED;
-  },
+      const url = await findDownloadUrl();
+      const pat = "_cornerMask";
+      const result = await findPattern(url, pat);
+      return result?.found ? FixedStatus.NOT_FIXED : FixedStatus.FIXED;
+    },
 };
+
+async function findDownloadUrl() {
+  const antigravityUrl = "https://formulae.brew.sh/api/cask/antigravity.json";
+  const resp = await fetch(antigravityUrl, {
+    method: "GET",
+    redirect: "follow",
+  });
+  const jsonResponse = await resp.json();
+  return jsonResponse.url;
+}
