@@ -15,7 +15,7 @@ export const Antigravity: AppMeta = {
 };
 
 async function findDownloadUrl() {
-  const antigravityUrl = "https://formulae.brew.sh/api/cask/antigravity.json";
+  const antigravityUrl = "https://antigravity-auto-updater-974169037036.us-central1.run.app/api/update/darwin-arm64/stable/latest";
   const resp = await fetch(antigravityUrl, {
     method: "GET",
     redirect: "follow",
